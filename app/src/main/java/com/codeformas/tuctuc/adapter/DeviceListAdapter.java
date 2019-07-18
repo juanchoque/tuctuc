@@ -1,4 +1,4 @@
-package com.codeformas.tuctuc;
+package com.codeformas.tuctuc.adapter;
 
 import java.util.List;
 
@@ -13,17 +13,15 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Device list adapter.
- * 
- * @author Lorensius W. L. T <lorenz@londatiga.net>
- *
- */
+import com.codeformas.tuctuc.R;
+
 public class DeviceListAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;	
 	private List<BluetoothDevice> mData;
+
 	private OnPairButtonClickListener mListener;
-	
+	private OnPlayButtonClickListener pListener;
+
 	public DeviceListAdapter(Context context) { 
         mInflater = LayoutInflater.from(context);        
     }
@@ -48,18 +46,27 @@ public class DeviceListAdapter extends BaseAdapter{
 		return position;
 	}
 
+	public OnPlayButtonClickListener getpListener() {
+		return pListener;
+	}
+
+	public void setpListener(OnPlayButtonClickListener pListener) {
+		this.pListener = pListener;
+	}
+
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		
 		if (convertView == null) {			
-			convertView			=  mInflater.inflate(R.layout.list_item_device, null);
+			convertView	= mInflater.inflate(R.layout.list_item_device, null);
 			
-			holder 				= new ViewHolder();
+			holder = new ViewHolder();
 			
-			holder.nameTv		= (TextView) convertView.findViewById(R.id.tv_name);
-			holder.addressTv 	= (TextView) convertView.findViewById(R.id.tv_address);
-			holder.pairBtn		= (Button) convertView.findViewById(R.id.btn_pair);
-			
+			holder.nameTv = convertView.findViewById(R.id.textName);
+			holder.addressTv = convertView.findViewById(R.id.textMac);
+			holder.pairBtn = (Button) convertView.findViewById(R.id.btnPair);
+			holder.playBtn = (Button) convertView.findViewById(R.id.btnPlay);
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -78,6 +85,14 @@ public class DeviceListAdapter extends BaseAdapter{
 				}
 			}
 		});
+		holder.playBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (pListener != null) {
+					pListener.onPlayButtonClick(position);
+				}
+			}
+		});
 		
         return convertView;
 	}
@@ -85,10 +100,15 @@ public class DeviceListAdapter extends BaseAdapter{
 	static class ViewHolder {
 		TextView nameTv;
 		TextView addressTv;
-		TextView pairBtn;
+		Button pairBtn;
+		Button playBtn;
 	}
 	
 	public interface OnPairButtonClickListener {
 		public abstract void onPairButtonClick(int position);
+	}
+
+	public interface OnPlayButtonClickListener {
+		public abstract void onPlayButtonClick(int position);
 	}
 }
