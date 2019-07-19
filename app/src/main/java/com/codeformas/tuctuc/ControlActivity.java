@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,11 +23,13 @@ public class ControlActivity extends AppCompatActivity {
     @BindView(R.id.imgBtnTop)
     ImageButton btnTop;
     @BindView(R.id.imgBtnBotton)
-    ImageButton btnButton;
+    ImageButton btnBotton;
     @BindView(R.id.imgBtnRigth)
     ImageButton btnRigth;
     @BindView(R.id.imgBtnLeft)
     ImageButton btnLeft;
+    @BindView(R.id.imgBtnStart)
+    ImageButton btnBtnStart;
 
     private ArrayList<BluetoothDevice> mDeviceList;
 
@@ -36,6 +39,8 @@ public class ControlActivity extends AppCompatActivity {
 
     private String command = "";
     private final UUID PORT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+
+    private boolean isPlay = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +56,70 @@ public class ControlActivity extends AppCompatActivity {
         }catch (Exception ex){
         }
 
+        this.btnBtnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activeAllButtons();
+            }
+        });
+
         this.btnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendData("1");
             }
         });
-        this.btnButton.setOnClickListener(new View.OnClickListener() {
+        this.btnBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendData("2");
             }
         });
+        this.btnRigth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendData("3");
+            }
+        });
+        this.btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendData("4");
+            }
+        });
+
+        this.initData();
 
         this.BTconnect();
+    }
+
+    private void initData(){
+
+        this.btnBtnStart.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+
+        this.btnTop.setEnabled(false);
+        this.btnBotton.setEnabled(false);
+        this.btnLeft.setEnabled(false);
+        this.btnRigth.setEnabled(false);
+    }
+
+    private void activeAllButtons() {
+        int icon = R.drawable.ic_stop_black_24dp;
+        if(this.isPlay){
+            //Drawable drawable =  null;
+            icon = R.drawable.ic_play_arrow_black_24dp;
+            this.isPlay = false;
+        }
+        else{
+            this.isPlay = true;
+        }
+
+        this.btnBtnStart.setImageResource(icon);
+
+        this.btnTop.setEnabled(this.isPlay);
+        this.btnBotton.setEnabled(this.isPlay);
+        this.btnLeft.setEnabled(this.isPlay);
+        this.btnRigth.setEnabled(this.isPlay);
     }
 
     private boolean BTconnect() {

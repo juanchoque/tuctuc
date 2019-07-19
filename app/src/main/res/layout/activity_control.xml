@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/btuk"
     tools:context=".ControlActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="395dp"
         android:layout_height="448dp"
         android:layout_marginStart="8dp"
@@ -20,28 +21,54 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imgBtnTop"
-            android:layout_width="match_parent"
+            android:id="@+id/imgBtnStart"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:padding="30dp"
+            app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/imgBtnTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imgBtnStart"
+            android:layout_centerHorizontal="true"
+            android:padding="30dp"
+            android:layout_marginBottom="10dp"
             app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
 
         <ImageButton
             android:id="@+id/imgBtnBotton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/imgBtnStart"
+            android:layout_centerHorizontal="true"
+            android:padding="30dp"
+            android:layout_marginTop="10dp"
             app:srcCompat="@drawable/ic_arrow_downward_black_24dp" />
 
         <ImageButton
             android:id="@+id/imgBtnRigth"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgBtnStart"
+            android:layout_alignParentRight="@+id/imgBtnStart"
+            android:layout_centerVertical="true"
+            android:padding="30dp"
+            android:layout_marginLeft="10dp"
             app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
 
         <ImageButton
             android:id="@+id/imgBtnLeft"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/imgBtnStart"
+            android:layout_centerVertical="true"
+            android:padding="30dp"
+            android:layout_marginRight="10dp"
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

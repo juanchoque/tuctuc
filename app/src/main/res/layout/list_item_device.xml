@@ -12,32 +12,40 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignTop="@+id/btnPair"
+        android:textStyle="bold"
         android:text="HHHHHHHHHHHH"/>
 
     <TextView
         android:id="@+id/textMac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@+id/textName"
         android:layout_marginTop="5dp"
         android:layout_alignBottom="@+id/btnPair"
         android:text="mac madsfsfsdf"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnPair"
+        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:text="PAIR"/>
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="PAIR" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnPlay"
+        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/btnPair"
+        android:padding="10dp"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        android:visibility="invisible"
         android:text="PLAY"/>
     
 </RelativeLayout>
